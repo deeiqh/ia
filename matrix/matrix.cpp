@@ -17,6 +17,11 @@ Matrix<Index, Data>::~Matrix(){
 }
 
 template<class Index, class Data>
+Index Matrix<Index, Data>::num_columns(){
+  return columns;
+}
+
+template<class Index, class Data>
 void Matrix<Index, Data>::set(Index row, Index column, Data d){
   array[row*columns+column] = d;
 }
@@ -71,16 +76,27 @@ void Matrix<Index, Data>::ones(){
 }
 
 template<class Index, class Data>
-Matrix<Index,Data> Matrix<Index, Data>::product(Matrix<Index, Data> B){
-  return B;
+Matrix<Index,Data> *Matrix<Index, Data>::product(Matrix<Index, Data> *B){
+  Matrix<Index,Data> *C = new Matrix<Index, Data> (rows, B->num_columns());
+  Data sum;
+  for(Index f=0; f<rows; f++){
+    for(Index k=0; k<B->num_columns();k++){
+      sum=0;
+      for(Index c=0;c<columns;c++){
+        sum += get(f,c) * B->get(c,k);
+      }
+      C->set(f,k,sum);
+    }
+  }
+  return C;
 }
 
 template<class Index, class Data>
-Matrix<Index,Data> *Matrix<Index, Data>::wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> &B){//al pasar por valor no inicializa (pero sí destruye) pero dentro hay un puntero al array verdadero y al destruirse le hace free, de tal forma que hay cualquier cosa en ese array, y así se toma el original(matriz). para evitar eso se hace paso por referencia, para que no destruya el puntero "array" que es el original
+Matrix<Index,Data> *Matrix<Index, Data>::wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> *B){//al pasar por valor no inicializa (pero sí destruye) pero dentro hay un puntero al array verdadero y al destruirse le hace free, de tal forma que hay cualquier cosa en ese array, y así se toma el original(matriz). para evitar eso se hace paso por referencia, para que no destruya el puntero "array" que es el original
   Matrix<Index,Data> *C = new Matrix<Index, Data> (rows, columns) ;
   for (int r=0; r<rows; r++){
     for(int c=0; c<columns; c++){
-      C->set(r, c, op( get(r,c), B.get(r,c) ) );
+      C->set(r, c, op( get(r,c), B->get(r,c) ) );
     }
   }
   //C.print_float();
@@ -89,8 +105,7 @@ Matrix<Index,Data> *Matrix<Index, Data>::wise_operation(Data (*op)(Data, Data), 
 }
 
 template<class Index, class Data>
-template<class Function>
-void Matrix<Index, Data>::wise_operation(Function op, Data d){
+void Matrix<Index, Data>::wise_operation(Data (*op)(Data, Data), Data d){
   for(int i=0; i<rows*columns; i++){
     array[i] = op(array[i], d);
   }

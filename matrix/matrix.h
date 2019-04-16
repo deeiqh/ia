@@ -11,6 +11,7 @@ class Matrix{
 	public:
 		Matrix(Index rows, Index columns);
     ~Matrix();
+    Index num_columns();
     void set(Index row, Index column, Data d);
     Data get(Index row, Index column) ;
     void print_float(char separator=',');
@@ -18,10 +19,9 @@ class Matrix{
     void print_char(char separator=',');
     void zeros();
     void ones();
-    Matrix<Index,Data> product(Matrix<Index, Data> B);
-    Matrix<Index,Data> *wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> &B);
-    template<class Function>
-    void wise_operation(Function op, Data d);
+    Matrix<Index,Data> *product(Matrix<Index, Data> *B);
+    Matrix<Index,Data> *wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> *B);
+    void wise_operation(Data (*op)(Data, Data), Data d);
 
 };
 

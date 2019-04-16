@@ -10,35 +10,23 @@ Data addition(Data a, Data b){
 }
 
 template<class Data>
-class subtraction_class{
-  public:
-    Data operator()(Data a, Data b){
-      return a-b;
-    }
-};
+Data subtraction(Data a, Data b){
+      return a-b;   
+}
 
 template<class Data>
-class product_class{
-  public:
-    Data operator()(Data a, Data b){
-      return a*b;
-    }
-};
+Data product(Data a, Data b){
+      return a*b;   
+}
 
 template<class Data>
-class division_class{
-  public:
-    Data operator()(Data a, Data b){
-      return a/b;
-    }
-};
+Data division(Data a, Data b){
+      return a/b;   
+}
 
 template<class Data>
-class pow_class{
-  public:
-    Data operator()(Data a, Data b){
-      return pow(a,b);
-    }
-};
+Data power(Data a, Data b){
+      return pow(a,b);   
+}
 
 #endif
