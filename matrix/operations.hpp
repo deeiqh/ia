@@ -5,12 +5,9 @@
 #include<cmath>
 
 template<class Data>
-class addition_class{
-  public:
-    Data operator()(Data a, Data b){
-      return a+b;
-    }
-};
+Data addition(Data a, Data b){
+      return a+b;   
+}
 
 template<class Data>
 class subtraction_class{

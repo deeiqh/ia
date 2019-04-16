@@ -72,38 +72,7 @@ Matrix<Index,Data> Matrix<Index, Data>::product(Matrix<Index, Data> B){
 }
 
 template<class Index, class Data>
-addition_class<Data> Matrix<Index, Data>::addition(){  
-  addition_class<Data> a;
-  return a;
-}
-
-template<class Index, class Data>
-subtraction_class<Data> Matrix<Index, Data>::subtraction(){  
-  subtraction_class<Data> a;
-  return a;
-}
-
-template<class Index, class Data>
-product_class<Data> Matrix<Index, Data>::product(){  
-  product_class<Data> a;
-  return a;
-}
-
-template<class Index, class Data>
-division_class<Data> Matrix<Index, Data>::division(){  
-  division_class<Data> a;
-  return a;
-}
-
-template<class Index, class Data>
-pow_class<Data> Matrix<Index, Data>::pow(){  
-  pow_class<Data> a;
-  return a;
-}
-
-template<class Index, class Data>
-template<class Function>
-Matrix<Index,Data> Matrix<Index, Data>::wise_operation(Function op, Matrix<Index, Data> B){
+Matrix<Index,Data> Matrix<Index, Data>::wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> B){
   Matrix<Index,Data> C(rows, columns);
   for (int r=0; r<rows; r++){
     for(int c=0; c<columns; c++){
