@@ -10,10 +10,10 @@ int main()
 	matriz.set(2,3,7) ;
 	matriz.print_float(',');
 	printf("%s\n","matriz original, arriba" );
-	Matrix<int, float> matriz_2(filas, columnas);
-	matriz_2.ones();
-	matriz.wise_operation(addition, matriz_2);
-	matriz.print_float(',');
+	Matrix<int, float> *matriz2;
+	matriz2 = matriz.wise_operation(addition, matriz);//al pasar por valor, hace una copia, pero no inicializa
+	matriz2->print_float(',');
+
 	return 0;
 }
 

@@ -12,14 +12,14 @@ class Matrix{
 		Matrix(Index rows, Index columns);
     ~Matrix();
     void set(Index row, Index column, Data d);
-    Data get(Index row, Index column);
+    Data get(Index row, Index column) ;
     void print_float(char separator=',');
     void print_int(char separator=',');
     void print_char(char separator=',');
     void zeros();
     void ones();
     Matrix<Index,Data> product(Matrix<Index, Data> B);
-    Matrix<Index,Data> wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> B);
+    Matrix<Index,Data> *wise_operation(Data (*op)(Data, Data), Matrix<Index, Data> &B);
     template<class Function>
     void wise_operation(Function op, Data d);
 
